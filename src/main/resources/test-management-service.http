@@ -1,0 +1,8 @@
+### Test the applciation
+GET http://localhost:8080/spring_api/test
+Accept: application/json
+
+
+### GET all the orders from RabbitMQ
+GET http://localhost:8080/spring_api/orders
+Accept: application/json
