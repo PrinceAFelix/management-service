@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 /**
@@ -56,5 +59,33 @@ public class RabbitMQComponent {
      */
     public List<OrderModel> getAllOrders() {
         return new ArrayList<OrderModel>(order_list);
+    }
+
+
+    /**
+     * Represents the getter for specific order
+     *
+     * @param foodType represents the type of food
+     * @return return the list of orders that matches the condition
+     */
+    public List<OrderModel> getSpecificOrder(String foodType) {
+
+        // Filter and check if a product contains the keyword the order list
+        return order_list.stream()
+                .filter(order -> order.getProduct().getName().toLowerCase().contains(foodType.toLowerCase()))
+                .sorted(Comparator.comparing(o -> o.getProduct().getName()))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Represents the getter for order by its id
+     *
+     * @param productId represents the product id
+     * @return the order that match the id
+     */
+    public Optional<OrderModel> getOrderById(String productId) {
+        return order_list.stream()  // Filter and compare with the product id
+                .filter(order -> order.getProduct().getId().equals(productId))
+                .findFirst();
     }
 }

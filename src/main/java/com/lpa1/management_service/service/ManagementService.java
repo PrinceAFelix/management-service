@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 /**
@@ -28,11 +29,39 @@ public class ManagementService {
      *
      * @return the list of all the orders as a Response Entity
      */
-    public ResponseEntity<List<OrderModel>> getLastReceivedOrder() {
+    public ResponseEntity<List<OrderModel>> getAllOrders() {
        try{
            return ResponseEntity.ok().body(rabbitMQ.getAllOrders());
        }catch (Exception e){
            return ResponseEntity.notFound().build();
        }
+    }
+
+    /**
+     * Method responsible for getting specific order
+     *
+     * @param foodType Represents the type of food
+     * @return return the list of orders
+     */
+    public ResponseEntity<List<OrderModel>> getSpecificOrder(String foodType) {
+        try{
+            return ResponseEntity.ok().body(rabbitMQ.getSpecificOrder(foodType));
+        }catch (Exception e){
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    /**
+     * Method for getting order by id
+     *
+     * @param productId represents the product id
+     * @return the order that matches the id
+     */
+    public ResponseEntity<Optional<OrderModel>> getOrderById(String productId) {
+        try{
+            return ResponseEntity.ok().body(rabbitMQ.getOrderById(productId));
+        }catch (Exception e){
+            return ResponseEntity.notFound().build();
+        }
     }
 }
