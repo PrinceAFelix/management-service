@@ -83,9 +83,9 @@ public class RabbitMQComponent {
      * @param productId represents the product id
      * @return the order that match the id
      */
-    public Optional<OrderModel> getOrderById(String productId) {
+    public Optional<OrderModel> getOrderById(int productId) {
         return order_list.stream()  // Filter and compare with the product id
-                .filter(order -> order.getProduct().getId().equals(productId))
+                .filter(order -> order.getProduct().getId() == productId)
                 .findFirst();
     }
 }

@@ -57,7 +57,7 @@ public class ManagementService {
      * @param productId represents the product id
      * @return the order that matches the id
      */
-    public ResponseEntity<Optional<OrderModel>> getOrderById(String productId) {
+    public ResponseEntity<Optional<OrderModel>> getOrderById(int productId) {
         try{
             return ResponseEntity.ok().body(rabbitMQ.getOrderById(productId));
         }catch (Exception e){

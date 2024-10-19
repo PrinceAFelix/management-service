@@ -64,7 +64,7 @@ public class ManagementController {
      * @return return the order that matches the given product id
      */
     @GetMapping("orders/id={productId}")
-    public ResponseEntity<Optional<OrderModel>> getOrderById(@PathVariable String productId){
+    public ResponseEntity<Optional<OrderModel>> getOrderById(@PathVariable int productId){
         return managementService.getOrderById(productId);
     }
 }

@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 public class ProductModel {
 
     //Represents the id of the product
-    private String id;
+    private int id;
     //Represents the product name
     private String name;
     //Represents the product price
